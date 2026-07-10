@@ -1,0 +1,51 @@
+/* app/static/css/style.css */
+
+/* Global typography - Inter font applied app-wide for a clean SaaS look */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Full-height gradient background for auth pages (signup/login) */
+.auth-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    padding: 2rem 1rem;
+}
+
+/* Glassmorphic card - semi-transparent, blurred background, soft border */
+.auth-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 1.25rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 440px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Rounded, modern form inputs matching the card's soft aesthetic */
+.form-control {
+    border-radius: 0.6rem;
+    padding: 0.65rem 0.9rem;
+    border: 1.5px solid #e2e8f0;
+}
+
+.form-control:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.15);
+}
+
+/* Primary button matching the gradient theme */
+.btn-primary {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border: none;
+    border-radius: 0.6rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+}
