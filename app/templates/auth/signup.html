@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 
 {% block title %}Sign Up | CareerCanvas AI{% endblock %}
 
@@ -10,11 +10,6 @@
             <p class="text-muted">Start your journey to becoming job-ready.</p>
         </div>
 
-        <!--
-            form.hidden_tag() renders the CSRF token field automatically -
-            required on every Flask-WTF form. Without this, POST requests
-            would be rejected by our CSRFProtect extension.
-        -->
         <form method="POST" novalidate>
             {{ form.hidden_tag() }}
 
@@ -46,4 +41,16 @@
                 {{ form.confirm_password.label(class="form-label fw-semibold") }}
                 {{ form.confirm_password(class="form-control" + (" is-invalid" if form.confirm_password.errors else ""), placeholder="Re-enter your password") }}
                 {% for error in form.confirm_password.errors %}
-                    <div
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            {{ form.submit(class="btn btn-primary w-100 py-2 fw-semibold") }}
+        </form>
+
+        <p class="text-center text-muted mt-4 mb-0">
+            Already have an account? <span class="fw-semibold">Log in (coming soon)</span>
+        </p>
+    </div>
+</div>
+{% endblock %}
