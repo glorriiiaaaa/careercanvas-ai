@@ -34,6 +34,8 @@ def create_app(config_name=None):
     # avoids circular imports as the project grows.
     db.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
+    login_manager.login_message_category = 'info'
     migrate.init_app(app, db)
     csrf.init_app(app)
 

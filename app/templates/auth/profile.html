@@ -1,0 +1,45 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Profile | CareerCanvas AI{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 600px;">
+    <div class="profile-card">
+        <h2 class="fw-bold mb-1">Your Profile</h2>
+        <p class="text-muted mb-4">Manage your account details.</p>
+
+        {% if not current_user.is_email_verified %}
+        <div class="alert alert-warning d-flex justify-content-between align-items-center">
+            <span>Your email is not verified yet.</span>
+            <a href="{{ url_for('auth.resend_verification') }}" class="btn btn-sm btn-warning">Resend Link</a>
+        </div>
+        {% endif %}
+
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" class="form-control" value="{{ current_user.email }}" disabled>
+                <div class="form-text">Email cannot be changed here yet.</div>
+            </div>
+
+            <div class="mb-4">
+                {{ form.full_name.label(class="form-label fw-semibold") }}
+                {{ form.full_name(class="form-control" + (" is-invalid" if form.full_name.errors else "")) }}
+                {% for error in form.full_name.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            {{ form.submit(class="btn btn-primary px-4 fw-semibold") }}
+        </form>
+
+        <hr class="my-4">
+
+        <p class="text-muted small mb-0">
+            Member since {{ current_user.created_at.strftime('%B %d, %Y') }}
+        </p>
+    </div>
+</div>
+{% endblock %}
