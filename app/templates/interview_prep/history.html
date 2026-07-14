@@ -1,0 +1,23 @@
+﻿{% extends "base.html" %}
+{% block title %}Interview History | CareerCanvas AI{% endblock %}
+{% block content %}
+<div class="container py-4" style="max-width: 700px;">
+    <h2 class="fw-bold mb-4">Your Interview Sessions</h2>
+    {% if sessions %}
+        {% for s in sessions %}
+        <div class="dashboard-card mb-3 d-flex justify-content-between align-items-center">
+            <div>
+                <p class="fw-semibold mb-1">{{ s.category }}</p>
+                <p class="text-muted small mb-0">{{ s.created_at.strftime("%B %d, %Y") }}</p>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="fw-bold text-primary">{{ s.overall_score }}%</span>
+                <a href="{{ url_for("interview_prep.results", session_id=s.id) }}" class="btn btn-sm btn-outline-primary">View</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">No sessions yet. <a href="{{ url_for("interview_prep.select_category") }}">Start your first practice session</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}

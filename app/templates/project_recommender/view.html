@@ -1,0 +1,40 @@
+﻿{% extends "base.html" %}
+{% block title %}Your Project Ideas | CareerCanvas AI{% endblock %}
+{% block content %}
+<div class="container py-4" style="max-width: 800px;">
+    <h2 class="fw-bold mb-1">Project Ideas For You</h2>
+    <p class="text-muted mb-4">Based on: {{ rec.interests }}</p>
+
+    {% for p in rec.projects %}
+    <div class="dashboard-card mb-4">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+            <h4 class="fw-bold mb-0">{{ p.title }}</h4>
+            <span class="badge bg-primary-subtle text-primary">{{ p.difficulty }}</span>
+        </div>
+        <p class="text-muted small mb-3">Estimated timeline: {{ p.timeline }}</p>
+
+        <p class="fw-semibold mb-1 small">Required Skills</p>
+        <div class="mb-3">
+            {% for s in p.required_skills %}<span class="badge bg-secondary-subtle text-secondary me-1 mb-1">{{ s }}</span>{% endfor %}
+        </div>
+
+        <p class="fw-semibold mb-1 small">Tech Stack</p>
+        <div class="mb-3">
+            {% for t in p.tech_stack %}<span class="badge bg-secondary-subtle text-secondary me-1 mb-1">{{ t }}</span>{% endfor %}
+        </div>
+
+        <p class="mb-2"><span class="fw-semibold small">Database Design:</span> <span class="text-muted small">{{ p.db_design }}</span></p>
+        <p class="mb-2"><span class="fw-semibold small">GitHub Structure:</span> <span class="text-muted small">{{ p.github_structure }}</span></p>
+
+        <hr>
+        <p class="fw-semibold mb-1 small">Resume Bullet Point</p>
+        <p class="mb-0 fst-italic">"{{ p.resume_description }}"</p>
+    </div>
+    {% endfor %}
+
+    <div class="d-flex gap-2">
+        <a href="{{ url_for("project_recommender.select_interests") }}" class="btn btn-primary">Get More Ideas</a>
+        <a href="{{ url_for("project_recommender.history") }}" class="btn btn-outline-secondary">View History</a>
+    </div>
+</div>
+{% endblock %}

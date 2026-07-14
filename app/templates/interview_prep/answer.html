@@ -1,0 +1,25 @@
+﻿{% extends "base.html" %}
+{% block title %}Question {{ question_number }} | CareerCanvas AI{% endblock %}
+{% block content %}
+<div class="container py-5" style="max-width: 650px;">
+    <div class="dashboard-card">
+        <p class="text-muted small mb-1">Question {{ question_number }} of {{ total_questions }}</p>
+        <div class="progress mb-4" style="height: 6px;">
+            <div class="progress-bar" style="width: {{ (question_number / total_questions * 100)|round }}%;"></div>
+        </div>
+        <h4 class="fw-bold mb-4">{{ question }}</h4>
+
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="mb-4">
+                {{ form.answer(class="form-control" + (" is-invalid" if form.answer.errors else ""), rows=6, placeholder="Type your answer here...") }}
+                {% for error in form.answer.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {{ form.submit(class="btn btn-primary w-100 py-2 fw-semibold") }}
+        </form>
+        <p class="text-muted small mt-3 mb-0">Feedback generation may take a few seconds after submitting.</p>
+    </div>
+</div>
+{% endblock %}

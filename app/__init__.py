@@ -22,6 +22,8 @@ def create_app(config_name=None):
     from app.models import user
     from app.models import resume
     from app.models import roadmap
+    from app.models import interview
+    from app.models import project_recommendation
 
     from app.auth import auth_bp
     app.register_blueprint(auth_bp)
@@ -34,5 +36,11 @@ def create_app(config_name=None):
 
     from app.roadmap import roadmap_bp
     app.register_blueprint(roadmap_bp)
+
+    from app.interview_prep import interview_prep_bp
+    app.register_blueprint(interview_prep_bp)
+
+    from app.project_recommender import project_recommender_bp
+    app.register_blueprint(project_recommender_bp)
 
     return app

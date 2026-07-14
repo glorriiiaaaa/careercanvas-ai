@@ -1,0 +1,24 @@
+﻿{% extends "base.html" %}
+{% block title %}Project Ideas | CareerCanvas AI{% endblock %}
+{% block content %}
+<div class="container py-5" style="max-width: 600px;">
+    <div class="dashboard-card">
+        <h2 class="fw-bold mb-1">Project Recommendations</h2>
+        <p class="text-muted mb-4">Tell us your interests and get tailored portfolio project ideas.</p>
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="mb-4">
+                {{ form.interests.label(class="form-label fw-semibold") }}
+                {{ form.interests(class="form-control" + (" is-invalid" if form.interests.errors else ""), placeholder="e.g. Python, APIs, machine learning") }}
+                {% for error in form.interests.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {{ form.submit(class="btn btn-primary w-100 py-2 fw-semibold") }}
+        </form>
+    </div>
+    <div class="text-center mt-3">
+        <a href="{{ url_for("project_recommender.history") }}" class="text-decoration-none small">View past recommendations</a>
+    </div>
+</div>
+{% endblock %}

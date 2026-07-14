@@ -16,11 +16,13 @@
     <nav class="navbar navbar-expand-lg app-navbar">
         <div class="container">
             <a class="navbar-brand fw-bold" href="{{ url_for('dashboard.index') }}">CareerCanvas AI</a>
-            <div class="d-flex align-items-center gap-3 flex-wrap">
-                <span class="text-muted small">{{ current_user.full_name }}</span>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span class="text-muted small me-2">{{ current_user.full_name }}</span>
                 <a href="{{ url_for('dashboard.index') }}" class="btn btn-sm btn-outline-primary">Dashboard</a>
-                <a href="{{ url_for('resume_analyzer.upload') }}" class="btn btn-sm btn-outline-primary">Resume Analyzer</a>
+                <a href="{{ url_for('resume_analyzer.upload') }}" class="btn btn-sm btn-outline-primary">Resume</a>
                 <a href="{{ url_for('roadmap.select_goal') }}" class="btn btn-sm btn-outline-primary">Roadmap</a>
+                <a href="{{ url_for('interview_prep.select_category') }}" class="btn btn-sm btn-outline-primary">Interview</a>
+                <a href="{{ url_for('project_recommender.select_interests') }}" class="btn btn-sm btn-outline-primary">Projects</a>
                 <a href="{{ url_for('auth.profile') }}" class="btn btn-sm btn-outline-primary">Profile</a>
                 <a href="{{ url_for('auth.logout') }}" class="btn btn-sm btn-outline-secondary">Log Out</a>
             </div>
