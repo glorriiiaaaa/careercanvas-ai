@@ -1,0 +1,68 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Dashboard | CareerCanvas AI{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    <h2 class="fw-bold mb-1">Welcome back, {{ current_user.full_name.split(" ")[0] }} 👋</h2>
+    <p class="text-muted mb-4">{{ data.motivational_quote }}</p>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-3 col-6">
+            <div class="stat-card">
+                <div class="stat-value">{{ data.resume_score }}%</div>
+                <div class="stat-label">Resume Score</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-card">
+                <div class="stat-value">{{ data.applications_sent }}</div>
+                <div class="stat-label">Applications Sent</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-card">
+                <div class="stat-value">{{ data.interviews_scheduled }}</div>
+                <div class="stat-label">Interviews Scheduled</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-card">
+                <div class="stat-value">{{ data.learning_hours_this_week }}h</div>
+                <div class="stat-label">Learning This Week</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-8">
+            <div class="dashboard-card mb-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-stars text-primary"></i> AI Insight</h5>
+                <p class="mb-0 text-muted">{{ data.ai_insight }}</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h5 class="fw-bold mb-3">Recent Activity</h5>
+                <ul class="list-unstyled mb-0">
+                    {% for activity in data.recent_activity %}
+                    <li class="d-flex justify-content-between border-bottom py-2">
+                        <span>{{ activity.text }}</span>
+                        <span class="text-muted small">{{ activity.time }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="dashboard-card">
+                <h5 class="fw-bold mb-3">Current Goal</h5>
+                <p class="fs-5 fw-semibold text-primary mb-3">{{ data.current_goal }}</p>
+                <a href="#" class="btn btn-primary w-100">View Roadmap</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

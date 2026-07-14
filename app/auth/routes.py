@@ -83,7 +83,7 @@ def resend_verification():
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('auth.profile'))
+        return redirect(url_for('dashboard.index'))
 
     form = LoginForm()
 
@@ -93,7 +93,7 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             flash(f'Welcome back, {user.full_name}!', 'success')
-            return redirect(url_for('auth.profile'))
+            return redirect(url_for('dashboard.index'))
         else:
             flash('Invalid email or password.', 'error')
 
@@ -155,14 +155,7 @@ def reset_password(token):
 @auth_bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    """
-    The first genuinely protected page in the app. @login_required
-    means Flask-Login automatically redirects anonymous visitors to
-    the login page (configured earlier via login_manager.login_view).
-    current_user is provided by Flask-Login - it's the logged-in
-    User object, available in any route/template without us passing it manually.
-    """
-    form = ProfileForm(obj=current_user)  # pre-fills the form with existing data
+    form = ProfileForm(obj=current_user)
 
     if form.validate_on_submit():
         current_user.full_name = form.full_name.data.strip()

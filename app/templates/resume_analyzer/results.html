@@ -1,0 +1,69 @@
+﻿{% extends "base.html" %}
+{% block title %}Analysis Results | CareerCanvas AI{% endblock %}
+{% block content %}
+<div class="container py-4" style="max-width: 800px;">
+
+    <div class="dashboard-card mb-4 text-center">
+        <p class="text-muted mb-1">ATS Score</p>
+        <div class="display-4 fw-bold text-primary">{{ analysis.ats_score }}%</div>
+        <p class="text-muted small mb-0">{{ analysis.original_filename }}</p>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="dashboard-card h-100">
+                <h5 class="fw-bold mb-3 text-success"><i class="bi bi-check-circle"></i> Strengths</h5>
+                <ul class="mb-0">
+                    {% for item in analysis.strengths %}<li>{{ item }}</li>{% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="dashboard-card h-100">
+                <h5 class="fw-bold mb-3 text-danger"><i class="bi bi-exclamation-circle"></i> Weaknesses</h5>
+                <ul class="mb-0">
+                    {% for item in analysis.weaknesses %}<li>{{ item }}</li>{% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="dashboard-card h-100">
+                <h5 class="fw-bold mb-3">Missing Skills</h5>
+                <div>
+                    {% for skill in analysis.missing_skills %}
+                        <span class="badge bg-secondary me-1 mb-1">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="dashboard-card h-100">
+                <h5 class="fw-bold mb-3">Suggested Keywords</h5>
+                <div>
+                    {% for kw in analysis.keyword_suggestions %}
+                        <span class="badge bg-primary-subtle text-primary me-1 mb-1">{{ kw }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-card mb-4">
+        <h5 class="fw-bold mb-3">Improved Bullet Points</h5>
+        {% for bullet in analysis.improved_bullets %}
+        <div class="mb-3 pb-3 {% if not loop.last %}border-bottom{% endif %}">
+            <p class="text-muted small mb-1"><s>{{ bullet.original }}</s></p>
+            <p class="mb-0 fw-semibold">{{ bullet.improved }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="d-flex gap-2">
+        <a href="{{ url_for('resume_analyzer.upload') }}" class="btn btn-primary">Analyze Another Resume</a>
+        <a href="{{ url_for('resume_analyzer.history') }}" class="btn btn-outline-secondary">View History</a>
+    </div>
+</div>
+{% endblock %}
