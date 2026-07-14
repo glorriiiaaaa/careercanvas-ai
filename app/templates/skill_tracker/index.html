@@ -1,0 +1,50 @@
+﻿{% extends "base.html" %}
+{% block title %}Skill Tracker | CareerCanvas AI{% endblock %}
+{% block content %}
+<div class="container py-4" style="max-width: 800px;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Skill Tracker</h2>
+            <p class="text-muted mb-0">{{ skills|length }} skills - {{ total_hours }} total learning hours</p>
+        </div>
+        <a href="{{ url_for("skill_tracker.add_skill") }}" class="btn btn-primary">+ Add Skill</a>
+    </div>
+
+    {% if skills %}
+        {% for skill in skills %}
+        <div class="dashboard-card mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+                <div>
+                    <h5 class="fw-bold mb-1">{{ skill.name }}</h5>
+                    <span class="badge bg-primary-subtle text-primary">{{ skill.level }}</span>
+                    <span class="text-muted small ms-2">{{ skill.learning_hours }}h logged</span>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for("skill_tracker.edit_skill", skill_id=skill.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <form method="POST" action="{{ url_for("skill_tracker.delete_skill", skill_id=skill.id) }}" class="delete-skill-form">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <div class="progress" style="height: 8px;">
+                <div class="progress-bar" style="width: {{ skill.progress_percent }}%;"></div>
+            </div>
+            <p class="text-muted small mt-1 mb-0">{{ skill.progress_percent }}% complete</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">No skills tracked yet. <a href="{{ url_for("skill_tracker.add_skill") }}">Add your first skill</a>.</p>
+    {% endif %}
+</div>
+
+<script>
+document.querySelectorAll(".delete-skill-form").forEach(function(form) {
+    form.addEventListener("submit", function(e) {
+        if (!confirm("Delete this skill?")) {
+            e.preventDefault();
+        }
+    });
+});
+</script>
+{% endblock %}

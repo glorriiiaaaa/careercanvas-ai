@@ -1,0 +1,32 @@
+﻿{% extends "base.html" %}
+{% block title %}{{ "Edit" if mode == "edit" else "Add" }} Skill | CareerCanvas AI{% endblock %}
+{% block content %}
+<div class="container py-5" style="max-width: 500px;">
+    <div class="dashboard-card">
+        <h2 class="fw-bold mb-4">{{ "Edit" if mode == "edit" else "Add" }} Skill</h2>
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.name.label(class="form-label fw-semibold") }}
+                {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), placeholder="e.g. Python") }}
+                {% for error in form.name.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+                {{ form.level.label(class="form-label fw-semibold") }}
+                {{ form.level(class="form-select") }}
+            </div>
+            <div class="mb-3">
+                {{ form.progress_percent.label(class="form-label fw-semibold") }}
+                {{ form.progress_percent(class="form-control" + (" is-invalid" if form.progress_percent.errors else "")) }}
+                {% for error in form.progress_percent.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+            </div>
+            <div class="mb-4">
+                {{ form.learning_hours.label(class="form-label fw-semibold") }}
+                {{ form.learning_hours(class="form-control" + (" is-invalid" if form.learning_hours.errors else "")) }}
+                {% for error in form.learning_hours.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}
+            </div>
+            {{ form.submit(class="btn btn-primary w-100 py-2 fw-semibold") }}
+        </form>
+    </div>
+</div>
+{% endblock %}
