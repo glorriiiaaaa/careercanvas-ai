@@ -25,6 +25,7 @@ def create_app(config_name=None):
     from app.models import interview
     from app.models import project_recommendation
     from app.models import skill
+    from app.models import application
 
     from app.auth import auth_bp
     app.register_blueprint(auth_bp)
@@ -46,5 +47,8 @@ def create_app(config_name=None):
 
     from app.skill_tracker import skill_tracker_bp
     app.register_blueprint(skill_tracker_bp)
+
+    from app.analytics import analytics_bp
+    app.register_blueprint(analytics_bp)
 
     return app
