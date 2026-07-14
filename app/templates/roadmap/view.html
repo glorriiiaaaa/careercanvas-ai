@@ -1,0 +1,50 @@
+﻿{% extends "base.html" %}
+{% block title %}{{ roadmap.career_goal }} Roadmap | CareerCanvas AI{% endblock %}
+{% block content %}
+<div class="container py-4" style="max-width: 800px;">
+
+    <div class="dashboard-card mb-4 text-center">
+        <p class="text-muted mb-1">Career Roadmap</p>
+        <h2 class="fw-bold text-primary mb-1">{{ roadmap.career_goal }}</h2>
+        <p class="text-muted mb-0">Estimated timeline: {{ roadmap.estimated_timeline }}</p>
+    </div>
+
+    <div class="dashboard-card mb-4">
+        <h5 class="fw-bold mb-3">Weekly Learning Plan</h5>
+        {% for item in roadmap.weekly_plan %}
+        <div class="mb-3 pb-3 {% if not loop.last %}border-bottom{% endif %}">
+            <p class="fw-semibold mb-1 text-primary">{{ item.week }} — {{ item.focus }}</p>
+            <div>
+                {% for topic in item.topics %}
+                    <span class="badge bg-primary-subtle text-primary me-1 mb-1">{{ topic }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="dashboard-card h-100">
+                <h5 class="fw-bold mb-3">Recommended Courses</h5>
+                <ul class="mb-0">
+                    {% for course in roadmap.recommended_courses %}<li>{{ course }}</li>{% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="dashboard-card h-100">
+                <h5 class="fw-bold mb-3">Suggested Projects</h5>
+                <ul class="mb-0">
+                    {% for project in roadmap.suggested_projects %}<li>{{ project }}</li>{% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <a href="{{ url_for("roadmap.select_goal") }}" class="btn btn-primary">Generate Another Roadmap</a>
+        <a href="{{ url_for("roadmap.history") }}" class="btn btn-outline-secondary">View History</a>
+    </div>
+</div>
+{% endblock %}

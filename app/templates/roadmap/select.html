@@ -1,0 +1,24 @@
+﻿{% extends "base.html" %}
+{% block title %}Career Roadmap | CareerCanvas AI{% endblock %}
+{% block content %}
+<div class="container py-5" style="max-width: 600px;">
+    <div class="dashboard-card">
+        <h2 class="fw-bold mb-1">Career Roadmap</h2>
+        <p class="text-muted mb-4">Pick a career goal and get a personalized, AI-generated learning plan.</p>
+
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="mb-4">
+                {{ form.career_goal.label(class="form-label fw-semibold") }}
+                {{ form.career_goal(class="form-select") }}
+            </div>
+            {{ form.submit(class="btn btn-primary w-100 py-2 fw-semibold") }}
+        </form>
+        <p class="text-muted small mt-3 mb-0">Generation may take 10-20 seconds.</p>
+    </div>
+
+    <div class="text-center mt-3">
+        <a href="{{ url_for("roadmap.history") }}" class="text-decoration-none small">View past roadmaps</a>
+    </div>
+</div>
+{% endblock %}
