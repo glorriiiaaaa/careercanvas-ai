@@ -26,6 +26,7 @@ def create_app(config_name=None):
     from app.models import project_recommendation
     from app.models import skill
     from app.models import application
+    from app.models import chat_message
 
     from app.auth import auth_bp
     app.register_blueprint(auth_bp)
@@ -50,5 +51,8 @@ def create_app(config_name=None):
 
     from app.analytics import analytics_bp
     app.register_blueprint(analytics_bp)
+
+    from app.ai_coach import ai_coach_bp
+    app.register_blueprint(ai_coach_bp)
 
     return app
